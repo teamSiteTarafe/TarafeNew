@@ -19,9 +19,14 @@ class Client extends Model implements Authenticatable
 
 
     //
-    public function getAuthPassword()
+    // public function getAuthPassword()
+    // {
+    //     return $this->motDePasse; 
+    // }
+
+    public function user()
     {
-        return $this->motDePasse; 
+    	return $this->belongsTo('App\User');
     }
     
 }

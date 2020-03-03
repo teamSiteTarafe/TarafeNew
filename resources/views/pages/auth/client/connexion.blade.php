@@ -13,17 +13,23 @@
         @if(Session::has('success'))
             <div class="alert alert-success" align="center">{{ Session::get('success') }}</div>
         @endif
+
+        @if(Session::has('errors'))
+            <div class="alert alert-danger" align="center">{{ Session::get('errors') }}</div>
+        @endif
         
         <form method="POST" action="{{ route('connexion') }}">
             
             <input type="email" name="email" placeholder="Adresse e-mail">
             <input type="password" name="password" placeholder="Mot de passe">
-            <label for="rappeler">
-                <input type="checkbox" name="rappeler" id="rappeler">
+            <label for="remember">
+            <input type="checkbox" name="remember" id="remember">
                 Se rappeler de moi
             </label>
 
-            <a href="#" class="oublier">Mot de passe oublié ?</a>
+            <a href="{{route('forgot.form') }}" class="oublier">Mot de passe oublié ?</a>
+
+            <!-- <input type="hidden" name="page" value="{{ isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : route('page.compte') }}"> -->
 
             {{ csrf_field() }}
 

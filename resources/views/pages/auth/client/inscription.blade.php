@@ -19,12 +19,13 @@
 
             <form method="post" action="{{ route('inscription') }}">
                 @csrf
-                <input type="text" name="nom" placeholder="nom">
-                <input type="text" name="prenom" placeholder="prenom">
-                <input type="email" name="email" placeholder="E-mail">
+                <!-- <input type="text" name="nom" placeholder="nom">
+                <input type="text" name="prenom" placeholder="prenom"> -->
                 <input type="tel" name="contact" placeholder="Numéro de téléphone">
+                <input type="email" name="email" placeholder="E-mail">
                 <input type="password" name="mot_de_pass" placeholder="Mot de passe">
                 <input type="password" name="mot_de_pass_conf" placeholder="Confirmer votre mot de passe">
+                
                 <input type="submit" value="S'inscrire">
             </form>
         </div>

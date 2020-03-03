@@ -6,14 +6,22 @@ use Illuminate\Http\Request;
 
 class AtelierController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function pageAtelier()
     {
-        //
+        $atelier = auth()->user();
+
+        return View('pages.ateliers.index', compact('atelier'));
     }
 
     /**

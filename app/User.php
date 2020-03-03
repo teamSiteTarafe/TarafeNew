@@ -2,13 +2,16 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 
-class User extends Authenticatable
+class User extends Model implements Authenticatable
 {
-    use Notifiable;
+    use Notifiable, BasicAuthenticatable;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +19,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email',
+        'motDePasse',
     ];
 
     /**
@@ -36,4 +40,47 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function getAuthPassword()
+    {
+        return $this->motDePasse; 
+    }
+
+    public function admin()
+    {
+    	return $this->hasOne('App\Admin');
+    }
+
+    public function ateliers()
+    {
+    	return $this->hasMany('App\Atelier');
+    }
+
+    public function boutiques()
+    {
+    	return $this->hasOne('App\Boutique');
+    }
+
+    public function client()
+    {
+    	return $this->hasOne('App\Client');
+    }
+
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::created( function($user) {
+
+    //         $user->client()->create([
+
+    //             "numeroDeTelephone" => request('contact'),
+    //             "user_id" => $user->id,
+
+    //         ]);
+
+    //     });
+    // }
+
 }

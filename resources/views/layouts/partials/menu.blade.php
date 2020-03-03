@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ asset('style/css/menu.css') }}">
-<link rel="stylesheet" href="{{ asset('style/bootstrap/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+<link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.css') }}">
 
 <!-----------           contact         ------>
 <div class="barre1 row">
@@ -43,9 +43,16 @@
             <span class="0separator00"></span>
             <li class="li_bouton"><a href="#" class="btn nbt">A propos</a></li>
             <span class="0separator00"></span>
-            <li class="li_bouton d_h"><a href="{{ route('page.connexion') }}" class="btn nbt">Connexion</a></li>
-            <span class="0separator00"></span>
-            <li class="li_bouton d_h"><a href="{{ route('page.inscription') }}" class="btn nbt">Inscription</a></li>
+            
+            @if(!Auth()->guest())
+                <li class="li_bouton d_h">
+                    <a href="connexion.php" class="btn nbt">Connexion</a>
+                </li>
+                <span class="0separator00"></span>
+                <li class="li_bouton d_h">
+                    <a href="inscription.php" class="btn nbt">Inscription</a>
+                </li>
+            @endif
         </ul>
     </div>
     <div class="trois_traits">
@@ -60,13 +67,8 @@
             <button class="submit00" ><img class="submit01" src="{{ asset('img/search.png') }}" alt=""></button>
         </form>
     </div>
-    <div class="div_connexion">
-        <div class="div_connexion2">
-            <a href="{{ route('page.connexion') }}" class="btn nbt">Connexion</a>
-            <span class="0separator00"></span>
-            <a href="{{ route('page.inscription') }}" class="btn nbt">Inscription</a>
-        </div>
-    </div>
+    
+    @yield('authentification')
     
 </div>
 
